@@ -31,7 +31,8 @@ public class TaskService {
 	                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
 	        
 	        Status currentStatus = task.getStatus();
-
+	        System.out.println("Previous status"+status);
+	        System.out.println("Current status"+currentStatus);
 	        if (!currentStatus.canTransitionTo(status)) {
 	            throw new RuntimeException(
 	                    "Cannot move task from " + currentStatus + " to " + status

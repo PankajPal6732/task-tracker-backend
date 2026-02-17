@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,10 +47,11 @@ public class TaskController {
 	            @PathVariable Long id,
 	            @RequestParam Status status) {
 			try {
+				System.out.println("Update task trigger"+ status);
 				var updatedTask = taskService.updateTaskStatus(id, status);
 				return new ResponseEntity<>(updatedTask, HttpStatus.OK);
 			} catch (RuntimeException ex) {
-				return ResponseEntity.notFound().build();
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 			}
 	    }
 }
